@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <h1 id="h1-last-updated"></h1>
+</head>
+
+<body>
+    <div>
+        <h1 id="h1-confirmed"></h1>
+        <h1 id="h1-recovered"></h1>
+        <h1 id="h1-deaths"></h1>
+    </div>
+    <div id="div-header">
+        <select id="select-countries"></select>
+        <input type="range" min="1" class="slider" id="range-select-days">
+        <h3 id="h3-days"></h3>
+    </div>
+    <div id="div-chart"><canvas id="myChart"></canvas></div>
+    <div id="div-chart"><canvas id="rateOfIncrease"></canvas></div>
+    <script type="text/javascript" src="./node_modules/chart.js/dist/Chart.js"></script>
+    <script type="text/javascript" src="src.js"></script>
+</body>
+
+</html>
