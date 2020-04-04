@@ -1,28 +1,189 @@
-h1 { 
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif; 
+body {
+    font-family: 'B612';font-size: 22px;
+    max-height: 800px;
+    overflow: hidden;
 }
 
-#div-chart{
-    width: 100%;
+/* div {
+    border: solid black 1px;
+    position: relative;
+} */
+
+#div-center {
+  position: absolute;
+  top: 80px;
+  margin: -10px auto;
+  width: 500px;
+  height: 500px;
+  left: 33%;
+  top: 21%;
+  border: solid black 1px;
+  background-color: #b7e7b6;
+  opacity: 0.98;
 }
 
-#div-header {
-    display: inline-block;
-    width: 100%;
+#img-body-face{
+    position: absolute;
+    left: 72%;
+    top: 25%;
+    transform: rotate(20deg);
 }
 
-.slider {
-    width: 80%;
-    background: #d3d3d3;
-  }
-  
-#h3-days {
-    display: inline-block;
-    padding: 3px;
+#img-body-sonu{
+    position: absolute;
+    height: 30%;
+    width: auto;
+    left: 330px;
+    top: 630px;
+    transform: rotate(58deg);
 }
 
-#select-countries {
-    display: inline-block;
-    padding: 3px;
+#img-body-menita{
+    position: absolute;
+    height: 22.5%;
+    width: auto;
+    left: 70px;
+    top: 150px;
+    transform: rotate(58deg);
+}
+
+#img-body-map{
+    position: absolute;
+    left: -360px;
+    top: 100px;
+    transform: rotate(65deg);
+    opacity: 0.5;
+}
+
+#div-bottom {
+    position: absolute;
+	bottom: 20px;
+    left: 10px;
+    width: 500px;
+    height: 200px
+}
+
+#div-top-left {
+    position: absolute;
+	top: 0;
+    left: 0;
+    width: 270px;
+    height: 249px;
+}
+
+#div-top-center-div{
+    position: absolute;
+    top: -90px;
+    left: 0;
+    margin: -10px auto;
+    width: 500px;
+    height: 100px;
+}
+
+#div-top-left-bottom{
+    width: 270px;
+    height: 200px;
+}
+
+#div-top-right{
+    position: absolute;
+    left: 320px;
+    width: 230px;
+    height: 300px;
+}
+
+#div-top-left-top{
+    width: 270px;
+    height: 45px;
+}
+
+#h2-days-left{
+    position: relative;
+    bottom: 15px;
+    color: rgb(75, 86, 97);
+    padding: 0px 0px 0px 13px;
+}
+
+#h1-display-days-left{
+    position: relative;
+    bottom: 180px;
+    left: 12px;
+    font-size: 220px;
+}
+
+.div-bottom-section {
+    height: 65px;
+}
+
+.img-bottom-section{
+    position: absolute;
+    padding: 0px 0px 0px 13px;
+}
+
+.h3-bottom-section-lables{
+    position: absolute;
+    left: 95px;
+    margin: 15px 0px 15px 0px;
+}
+
+#h3-bottom-section-label-infected{
+    color: rgb(250, 109, 98);
+}
+
+#h3-bottom-section-label-recovered{
+    color: rgb(0, 85, 126);
+}
+
+#h3-bottom-section-label-deaths{
+    color: rgb(75, 86, 97);
+}
+
+#h3-top-center-div-label{
+    position: absolute;
+    color: rgb(75, 86, 97);
+    left: 0;
+    top: 75%;
+    margin: 0px 130px 0px 0px;
+}
+
+#h1-body-days-displayed{
+    position: absolute;
+    font-size: 1300px;
+    color: black;
+    transform: rotate(325deg);
+    top: -42%;
+    opacity: 0.15;
+    left: 0%;
+    margin: 0px;
+}
+
+.div-top-right-inside{
+    height: 155px;
+    width: 230px;
+}
+
+.div-vertical-top-right {
+    position: relative;
+    width: 226px;
+    height: 50px;
+}
+
+.img-top-section{
+    position: relative;
+    top: 11px;
+    padding: 0px 10px;
+}
+
+.img-top-section-arrows{
+    position: relative;
+    left: 105px;
+    top: -95px;
+    padding: 0px 10px;
+}
+
+.h4-img-top-section-text{
+    position: relative;
+    bottom: 44px;
+    left: 60px;
+    font-size: 18px;
 }

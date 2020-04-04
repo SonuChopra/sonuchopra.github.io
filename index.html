@@ -1,27 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <h1 id="h1-last-updated"></h1>
-</head>
-
 <body>
-    <div>
-        <h1 id="h1-confirmed"></h1>
-        <h1 id="h1-recovered"></h1>
-        <h1 id="h1-deaths"></h1>
+    <link href='https://fonts.googleapis.com/css?family=B612' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="main2.css">
+    <div id="div-center">
+        <input type="text" id="passwordInput" placeholder="That party was __________">
+        <a href="main.html"><button id="button-submit" style="display: none;">Correct</button></a>
     </div>
-    <div id="div-header">
-        <select id="select-countries"></select>
-        <input type="range" min="1" class="slider" id="range-select-days">
-        <h3 id="h3-days"></h3>
-    </div>
-    <div id="div-chart"><canvas id="myChart"></canvas></div>
-    <div id="div-chart"><canvas id="rateOfIncrease"></canvas></div>
-    <script type="text/javascript" src="./mod/chart.js/dist/Chart.js"></script>
-    <script type="text/javascript" src="src.js"></script>
+    <script type="text/javascript" src="src2.js"></script>
 </body>
 
 </html>

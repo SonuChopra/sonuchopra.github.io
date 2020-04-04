@@ -1,179 +1,197 @@
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+let COUNTRY = "US";
+
+function setDate(param){
+  let lastUpdatedDate = new Date(param);
+  document.getElementById("h3-top-center-div-label").innerHTML = "As of " + lastUpdatedDate.toDateString();
 }
 
-var optForBar = {
-  events: false,
-  tooltips: {
-    enabled: false
-  },
-  hover: {
-    animationDuration: 0
-  },
-  title: {
-    display: true,
-    text: 'New Cases by Day',
-    fontSize: 24
-  },
-  animation: {
-    duration: 1,
-    onComplete: function () {
-      var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
-      ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'bottom';
+function setDaysLeft(param){
+  document.getElementById("h1-body-days-displayed").innerHTML = param;
+  document.getElementById("h1-display-days-left").innerHTML = param;
+}
 
-      this.data.datasets.forEach(function (dataset, i) {
-        var meta = chartInstance.controller.getDatasetMeta(i);
-        meta.data.forEach(function (bar, index) {
-          var data = dataset.data[index];
-          ctx.fillText(data, bar._model.x, bar._model.y - 5);
-        });
-      });
-    }
+function setConfirmed(param1, param2){
+  document.getElementById("h3-bottom-section-label-infected").innerHTML = "Confirmed " + param1 + " (+" + param2 + ")";
+}
+
+function setRecovered(param1, param2){
+  document.getElementById("h3-bottom-section-label-recovered").innerHTML = "Recovered " + param1 + " (+" + param2 + ")";
+}
+
+function setDeaths(param1, param2){
+  document.getElementById("h3-bottom-section-label-deaths").innerHTML = "Deaths " + param1 + " (+" + param2 + ")";
+}
+
+function getDaysLeft(){
+  let today = new Date();
+  if(today.getMonth() === 3) {
+    return today.getDate() - 3 + 45;
+  } else if(today.getMonth() === 4){
+    return today.getDate() - 30 + 45;
   }
-};
+}
+
+function getTodaysData(data){
+  return data[COUNTRY][data[COUNTRY].length - 1];
+}
+
+function getTodaysNewConfirmed(data){
+  return data[COUNTRY][data[COUNTRY].length - 1].confirmed - data[COUNTRY][data[COUNTRY].length - 2].confirmed;
+}
+
+function getTodaysNewRecovered(data){
+  return data[COUNTRY][data[COUNTRY].length - 1].recovered - data[COUNTRY][data[COUNTRY].length - 2].recovered;
+}
+
+function getTodaysNewDeaths(data){
+  return data[COUNTRY][data[COUNTRY].length - 1].deaths - data[COUNTRY][data[COUNTRY].length - 2].deaths;
+}
+
+function getTodaysRateConfirmed(data){
+  return (((data[COUNTRY][data[COUNTRY].length - 1].newConfirmed - data[COUNTRY][data[COUNTRY].length - 2].newConfirmed) / data[COUNTRY][data[COUNTRY].length - 2].newConfirmed) * 100)
+}
+
+function getTodaysRateRecovered(data){
+  return ((data[COUNTRY][data[COUNTRY].length - 1].newRecovered - data[COUNTRY][data[COUNTRY].length - 2].newRecovered) / data[COUNTRY][data[COUNTRY].length - 2].newRecovered) * 100
+}
+
+function getTodaysRateDeaths(data){
+  return ((data[COUNTRY][data[COUNTRY].length - 1].newDeaths - data[COUNTRY][data[COUNTRY].length - 2].newDeaths) / data[COUNTRY][data[COUNTRY].length - 2].newDeaths) * 100
+}
+
+function setTodaysConfirmedRate(param1){
+  document.getElementById("h4-img-top-section-text-confirmed").innerHTML = Math.abs(parseInt(param1, 10)) + "%";
+  if (param1 >= 0){
+    document.getElementById("h4-img-top-section-text-confirmed").style.color = "rgb(250, 109, 98)"
+    document.getElementById("img-top-section-arrows-confirmed").src = "uparrow.png";
+  } else {
+    document.getElementById("h4-img-top-section-text-confirmed").style.color = "rgb(50,205,50)"
+    document.getElementById("img-top-section-arrows-confirmed").src = "downarrow.png";
+  }
+}
+
+function setTodaysCoveredRate(param1){
+  document.getElementById("h4-img-top-section-text-recovered").innerHTML = Math.abs(parseInt(param1, 10)) + "%";
+  if (param1 >= 0){
+    document.getElementById("h4-img-top-section-text-recovered").style.color = "rgb(50,205,50)"
+    document.getElementById("img-top-section-arrows-recovered").src = "uparrow.png";
+  } else {
+    document.getElementById("h4-img-top-section-text-recovered").style.color = "rgb(250, 109, 98)"
+    document.getElementById("img-top-section-arrows-recovered").src = "downarrow.png";
+  }
+}
+
+function setTodaysDeathsRate(param1){
+  document.getElementById("h4-img-top-section-text-deaths").innerHTML = Math.abs(parseInt(param1, 10)) + "%";
+  if (param1 >= 0){
+    document.getElementById("h4-img-top-section-text-deaths").style.color = "rgb(250, 109, 98)"
+    document.getElementById("img-top-section-arrows-deaths").src = "uparrow.png";
+  } else {
+    document.getElementById("h4-img-top-section-text-deaths").style.color = "rgb(50,205,50)"
+    document.getElementById("img-top-section-arrows-deaths").src = "downarrow.png";
+  }
+}
+
+function getYBasedOnX(perm){
+  return ((3.111)*perm - 300);
+}
+
+function pushMenitaCloser(){
+  document.getElementById("img-body-menita").style.left = (document.getElementById("img-body-menita").offsetLeft + 5) + "px";
+  let newY = getYBasedOnX(document.getElementById("img-body-menita").offsetLeft);
+  document.getElementById("img-body-menita").style.top = parseInt(newY, 10) + "px";
+}
+
+function placeMenita(perm){
+  let today = new Date();
+  let todaysDate;
+  if(today.getMonth() === 3) {
+    todaysDate = today.getDate() - 3;
+  } else if(today.getMonth() === 4) {
+    todaysDate = today.getDate() + 27;
+  }
+  for (let i=0; i<todaysDate; i++){
+    pushMenitaCloser();
+  }
+}
+
+function setNewForTodayAndYesturdayData(data){
+    data[COUNTRY][data[COUNTRY].length - 1].newConfirmed = data[COUNTRY][data[COUNTRY].length - 1].confirmed - data[COUNTRY][data[COUNTRY].length - 2].confirmed
+    data[COUNTRY][data[COUNTRY].length - 1].newRecovered = data[COUNTRY][data[COUNTRY].length - 1].recovered - data[COUNTRY][data[COUNTRY].length - 2].recovered
+    data[COUNTRY][data[COUNTRY].length - 1].newDeaths = data[COUNTRY][data[COUNTRY].length - 1].deaths - data[COUNTRY][data[COUNTRY].length - 2].deaths
+
+    data[COUNTRY][data[COUNTRY].length - 2].newConfirmed = data[COUNTRY][data[COUNTRY].length - 2].confirmed - data[COUNTRY][data[COUNTRY].length - 3].confirmed
+    data[COUNTRY][data[COUNTRY].length - 2].newRecovered = data[COUNTRY][data[COUNTRY].length - 2].recovered - data[COUNTRY][data[COUNTRY].length - 3].recovered
+    data[COUNTRY][data[COUNTRY].length - 2].newDeaths = data[COUNTRY][data[COUNTRY].length - 2].deaths - data[COUNTRY][data[COUNTRY].length - 3].deaths
+}
+
+function setPicture(confirmRate, recoverRate, deathRate){
+  let goodPoints = 0;
+  if(confirmRate < 0) {
+    goodPoints = goodPoints + 1;
+  } 
+  if (recoverRate > 0) {
+    goodPoints = goodPoints + 1;
+  }
+  if(deathRate < 0){
+    goodPoints = goodPoints + 1;
+  }
+  if(goodPoints === 3) {
+    document.getElementById("img-body-face").src = "5.png";
+  }
+  if(goodPoints === 0) {
+    document.getElementById("img-body-face").style.width = "340px";
+    document.getElementById("img-body-face").style.height = "auto";
+    document.getElementById("img-body-face").style.left = "74%";
+    document.getElementById("img-body-face").src = "1.png";
+  }
+  if(goodPoints === 1){
+    document.getElementById("img-body-face").src = "4.png";
+  }
+  if(goodPoints === 2){
+    document.getElementById("img-body-face").src = "7.png";
+  }
+  if(recoverRate > 20 && goodPoints == 2) {
+    document.getElementById("img-body-face").style.width = "380px";
+    document.getElementById("img-body-face").style.height = "auto";
+    document.getElementById("img-body-face").style.left = "74%";
+    document.getElementById("img-body-face").src = "8.png";
+  }
+  if(confirmRate > 10 && goodPoints == 1) {
+    document.getElementById("img-body-face").src = "2.png";
+  }
+  if(confirmRate < 10 && goodPoints == 1) {
+    document.getElementById("img-body-face").src = "6.png";
+  }
+}
+
 
 fetch("https://pomber.github.io/covid19/timeseries.json")
   .then(response => response.json())
   .then((data) => {
 
-    let countriesSelector = document.getElementById("select-countries");
-    Object.getOwnPropertyNames(data).forEach((country) => {
-      var option = document.createElement("option");
-      option.text = country.toString();
-      countriesSelector.add(option);
-    })
+  setDate(getTodaysData(data).date);
+  setDaysLeft(getDaysLeft());
+  setConfirmed(getTodaysData(data).confirmed, getTodaysNewConfirmed(data));
+  setRecovered(getTodaysData(data).recovered, getTodaysNewRecovered(data));
+  setDeaths(getTodaysData(data).deaths, getTodaysNewDeaths(data));
+  setNewForTodayAndYesturdayData(data);
 
-    document.getElementById("range-select-days").value = data[document.getElementById("select-countries").value].length;
-    document.getElementById("h3-days").innerHTML = data[document.getElementById("select-countries").value].length + " days"
+  let rateConfirmed = getTodaysRateConfirmed(data);
+  let rateRecovered = getTodaysRateRecovered(data);
+  let rateDeaths = getTodaysRateDeaths(data);
 
-    document.getElementById("select-countries").value = "US"
-    refreshPage(data, "US", 1);
+  setTodaysConfirmedRate(rateConfirmed);
+  setTodaysCoveredRate(rateRecovered);
+  setTodaysDeathsRate(rateDeaths);
 
-    document.getElementById("select-countries").addEventListener("change", function () {
-      refreshPage(data, document.getElementById("select-countries").value);
-    });
+  setPicture(rateConfirmed, rateRecovered, rateDeaths);
 
-    document.getElementById("range-select-days").addEventListener("click", function () {
-      refreshPage(data, document.getElementById("select-countries").value, 1);
-    });
-  });
+  placeMenita();
+    
+});
 
 
-function refreshPage(data, country) {
-  data[country][0].newConfirmed = 0;
-  data[country][0].newRecovered = 0;
-  data[country][0].newDeaths = 0;
-  for (let i = 1; i < data[country].length; i++) {
-    data[country][i].newConfirmed = data[country][i].confirmed - data[country][i - 1].confirmed
-    data[country][i].newRecovered = data[country][i].recovered - data[country][i - 1].recovered
-    data[country][i].newDeaths = data[country][i].deaths - data[country][i - 1].deaths
-  }
 
-  document.getElementById("range-select-days").max = data[country].length;
 
-  document.getElementById("range-select-days").addEventListener("input", function () {
-    document.getElementById("h3-days").innerHTML = document.getElementById("range-select-days").value + " days"
-  })
 
-  let lastUpdatedDate = new Date(data[country][data[country].length - 1].date);
-
-  document.getElementById("h1-last-updated").innerHTML = "Last Updated: " + lastUpdatedDate.toDateString();
-
-  confirmedRateIncrease = ((data[country][data[country].length - 1].newConfirmed - data[country][data[country].length - 2].newConfirmed) / data[country][data[country].length - 2].newConfirmed) * 100
-  recoveredRateIncrease = ((data[country][data[country].length - 1].newRecovered - data[country][data[country].length - 2].newRecovered) / data[country][data[country].length - 2].newRecovered) * 100
-  deathsRateIncrease = ((data[country][data[country].length - 1].newDeaths - data[country][data[country].length - 2].newDeaths) / data[country][data[country].length - 2].newDeaths) * 100
-
-  if (confirmedRateIncrease > 0) {
-    document.getElementById("h1-confirmed").style.color = "red"
-    document.getElementById("h1-confirmed").innerHTML = "Confirmed: " + numberWithCommas(data[country][data[country].length - 1].confirmed) + " &#8679;" + Math.abs(Math.floor(confirmedRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newConfirmed + ")";
-  } else {
-    document.getElementById("h1-confirmed").style.color = "green"
-    document.getElementById("h1-confirmed").innerHTML = "Confirmed: " + numberWithCommas(data[country][data[country].length - 1].confirmed) + " &#8681;" + Math.abs(Math.floor(confirmedRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newConfirmed + ")";
-  }
-
-  if (recoveredRateIncrease < 0) {
-    document.getElementById("h1-recovered").style.color = "red"
-    document.getElementById("h1-recovered").innerHTML = "Recovered: " + numberWithCommas(data[country][data[country].length - 1].recovered) + " &#8681;" + Math.abs(Math.floor(recoveredRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newRecovered + ")";
-  } else {
-    document.getElementById("h1-recovered").style.color = "green"
-    document.getElementById("h1-recovered").innerHTML = "Recovered: " + numberWithCommas(data[country][data[country].length - 1].recovered) + " &#8679;" + Math.abs(Math.floor(recoveredRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newRecovered + ")";
-  }
-
-  if (deathsRateIncrease > 0) {
-    document.getElementById("h1-deaths").style.color = "red"
-    document.getElementById("h1-deaths").innerHTML = "Deaths: " + numberWithCommas(data[country][data[country].length - 1].deaths) + " &#8679;" + Math.abs(Math.floor(deathsRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newDeaths + ")";
-  } else {
-    document.getElementById("h1-deaths").style.color = "green"
-    document.getElementById("h1-deaths").innerHTML = "Deaths: " + numberWithCommas(data[country][data[country].length - 1].deaths) + " &#8681;" + Math.abs(Math.floor(deathsRateIncrease)) + "%" + " (+" + data[country][data[country].length - 1].newDeaths + ")";
-  }
-
-  let SPLICEDATES = data[country].length - document.getElementById("range-select-days").value;
-  var ctx = document.getElementById('myChart');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: data[country].map(a => a.date).splice(SPLICEDATES),
-      datasets: [
-        {
-          label: '# of Deaths',
-          data: data[country].map(a => a.deaths).splice(SPLICEDATES),
-          backgroundColor: [
-            'rgba(0, 0, 0, 0.8)'
-          ],
-          borderColor: [
-            'rgba(0, 0, 0, 1)'
-          ],
-          borderWidth: 1
-        },
-        {
-          label: '# of Recovered',
-          data: data[country].map(a => a.recovered).splice(SPLICEDATES),
-          backgroundColor: [
-            'rgba(0, 177, 106, 0.6)'
-          ],
-          borderColor: [
-            'rgba(30, 130, 76, 1)'
-          ],
-          borderWidth: 1
-        },
-        {
-          label: '# of Cases',
-          data: data[country].map(a => a.confirmed).splice(SPLICEDATES),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.4)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)'
-          ],
-          borderWidth: 1
-        }]
-    },
-    options: {
-      title: {
-          display: true,
-          text: 'Total Confirmed, Recovered and Deaths by Day',
-          fontSize: 24
-      }
-  }
-  });
-  var ctx = document.getElementById('rateOfIncrease');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: data[country].map(a => a.date).splice(SPLICEDATES),
-      datasets: [
-        {
-          label: '# of new Cases',
-          data: data[country].map(a => a.newConfirmed).splice(SPLICEDATES),
-          backgroundColor: 'rgba(0, 0, 0, 1)',
-          borderColor: 'rgba(0, 0, 0, 1)',
-          borderWidth: 1
-        }
-      ]
-    },
-    options: optForBar
-  });
-}
