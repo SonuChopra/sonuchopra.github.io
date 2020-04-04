@@ -62,11 +62,11 @@ function setTodaysConfirmedRate(param1) {
     document.getElementById("table-confirmed-rate").innerHTML = param1 + "%";
     if (param1 > 0) {
         document.getElementById("table-confirmed-arrow").style.color = "red"
-        document.getElementById("table-confirmed-arrow").innerHTML = "&#8681;";
+        document.getElementById("table-confirmed-arrow").innerHTML = "&#8679;";
     } 
     else if(param1 < 0) {
         document.getElementById("table-confirmed-arrow").style.color = "green"
-        document.getElementById("table-confirmed-arrow").innerHTML = "&#8679;";
+        document.getElementById("table-confirmed-arrow").innerHTML = "&#8681;";
     }
     else {
         document.getElementById("table-confirmed-arrow").innerHTML = "&#9473;";
@@ -92,11 +92,11 @@ function setTodaysDeathsRate(param1) {
     document.getElementById("table-deaths-rate").innerHTML = param1 + "%";
     if (param1 > 0) {
         document.getElementById("table-deaths-arrow").style.color = "red"
-        document.getElementById("table-deaths-arrow").innerHTML = "&#8681;";
+        document.getElementById("table-deaths-arrow").innerHTML = "&#8679;";
     } 
     else if(param1 < 0) {
         document.getElementById("table-deaths-arrow").style.color = "green"
-        document.getElementById("table-deaths-arrow").innerHTML = "&#8679;";
+        document.getElementById("table-deaths-arrow").innerHTML = "&#8681;";
     }
     else {
         document.getElementById("table-deaths-arrow").innerHTML = "&#9473;";
