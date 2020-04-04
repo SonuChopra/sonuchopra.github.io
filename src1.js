@@ -93,7 +93,7 @@ function setTodaysDeathsRate(param1){
 }
 
 function getYBasedOnX(perm){
-  return ((3.111)*perm - 300);
+  return ((2.165)*perm);
 }
 
 function pushMenitaCloser(){
