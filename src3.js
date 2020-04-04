@@ -5,8 +5,14 @@ function numberWithCommas(x) {
 }
 
 function setDate(param) {
-    let lastUpdatedDate = new Date(param);
-    document.getElementById("p-date").innerHTML = "Last updated " + lastUpdatedDate.toDateString();
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad)/) != null ){
+        var dateParts = param.substring(0,10).split('-');
+        myDate= dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];
+        document.getElementById("p-date").innerHTML = "Last updated " + myDate;
+    } else {
+        let lastUpdatedDate = new Date(param);
+        document.getElementById("p-date").innerHTML = "Last updated " + lastUpdatedDate.toDateString();
+    }
 }
 
 function setDaysLeft(param) {
