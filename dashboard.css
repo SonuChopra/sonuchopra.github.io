@@ -6,8 +6,12 @@ body {
 
 #div-quick-glimpse{
     position: absolute;
-    height: 100%;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    margin-top: -130px;
+    margin-left: -400px;
+    width: 800px;
+    height: 260px;
 }
 
 #div-top-center{
@@ -21,7 +25,7 @@ body {
 }
 
 table {
-    position: relative;
+    position: absolute;
     border-collapse: collapse;
     top: 0px;
     width: 100%;
@@ -81,8 +85,8 @@ table {
 
 #div-light-gray-back-confirmed{
     position: absolute;
-    top: 282px;
-    left: 320px;
+    top: 1px;
+    left: 0px;
     width: 800px;
     height: 86px;
     background-color: #f1f1f1;
@@ -90,8 +94,8 @@ table {
 
 #div-light-gray-back-recovered{
     position: absolute;
-    top: 368px;
-    left: 320px;
+    top: 88px;
+    left: 0px;
     width: 800px;
     height: 87px;
     background-color: #f1f1f1;
@@ -99,8 +103,8 @@ table {
 
 #div-light-gray-back-deaths{
     position: absolute;
-    top: 456px;
-    left: 320px;
+    top: 175px;
+    left: 0px;
     width: 800px;
     height: 86px;
     background-color: #f1f1f1;
