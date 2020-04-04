@@ -1,0 +1,26 @@
+body {
+    font-family: 'B612';font-size: 22px;
+    max-height: 800px;
+    overflow: hidden;
+}
+
+div {
+    border: solid black 1px;
+}
+
+#div-quick-glimpse{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#div-top-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -400px;
+    width: 800px;
+    height: 500px;
+}
+
