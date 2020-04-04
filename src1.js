@@ -25,9 +25,9 @@ function setDeaths(param1, param2){
 function getDaysLeft(){
   let today = new Date();
   if(today.getMonth() === 3) {
-    return today.getDate() - 3 + 45;
+    return 45 - (today.getDate() - 3);
   } else if(today.getMonth() === 4){
-    return today.getDate() - 30 + 45;
+    return 45 - (today.getDate() - 30);
   }
 }
 
@@ -108,7 +108,7 @@ function placeMenita(perm){
   if(today.getMonth() === 3) {
     todaysDate = today.getDate() - 3;
   } else if(today.getMonth() === 4) {
-    todaysDate = today.getDate() + 27;
+    todaysDate = today.getDate() + 27
   }
   for (let i=0; i<todaysDate; i++){
     pushMenitaCloser();
