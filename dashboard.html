@@ -4,9 +4,45 @@
     <link href='https://fonts.googleapis.com/css?family=B612' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="dashboard.css">
     <div id="div-quick-glimpse">
+        <div id="div-light-gray-back-confirmed">
+            <div id="div-confirmed-progress"></div>
+        </div><br>
+        <div id="div-light-gray-back-recovered">
+            <div id="div-recovered-progress"></div>
+        </div><br>
+        <div id="div-light-gray-back-deaths">
+            <div id="div-deaths-progress"></div>
+        </div><br>
         <div id="div-top-center">
-
+            <p id="p-date">Last updated Friday, April 10th, 2020</p>
+            <table>
+                <tr>
+                  <td class="table-image"><img class="img-top-section" src="img_confirmed.png"></td>
+                  <td class="table-label">Confirmed</td>
+                  <td id="table-confirmed-total" class="table-total">40,000,000</td>
+                  <td id="table-confirmed-new" class="table-new">+100,000</td>
+                  <td id="table-confirmed-rate" class="table-rate">200%</td>
+                  <td id="table-confirmed-arrow" class="table-arrow">&#8679;</td>
+                </tr>
+                <tr>
+                    <td class="table-image"><img class="img-top-section" src="img_recovered.png"></td>
+                    <td class="table-label">Recovered</td>
+                    <td id="table-recovered-total" class="table-total">40,000,000</td>
+                    <td id="table-recovered-new" class="table-new">+30,000</td>
+                    <td id="table-recovered-rate" class="table-rate">200%</td>
+                    <td id="table-recovered-arrow" class="table-arrow">&#9473;</td>
+                  </tr>
+                  <tr>
+                    <td class="table-image"><img class="img-top-section" src="img_deaths.png"></td>
+                    <td class="table-label">Deaths</td>
+                    <td id="table-deaths-total" class="table-total">40,000,000</td>
+                    <td id="table-deaths-new" class="table-new">+30,000</td>
+                    <td id="table-deaths-rate" class="table-rate">200%</td>
+                    <td id="table-deaths-arrow" class="table-arrow">&#8681;</td>
+                  </tr>
+              </table>
         </div>
+        <p id="p-disclaimer">*The above table shows total cases, new cases (as of the day before) and rate of increase (from the day before) respectively. It is generally understood that we want the rate confirmed and death cases to go down(&#8681;), while the rate of recovered cases should go up(&#8679;)</p>
     </div>
     <script type="text/javascript" src="src3.js"></script>
 </body>

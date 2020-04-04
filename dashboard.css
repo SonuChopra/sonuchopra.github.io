@@ -4,10 +4,6 @@ body {
     overflow: hidden;
 }
 
-div {
-    border: solid black 1px;
-}
-
 #div-quick-glimpse{
     position: absolute;
     height: 100%;
@@ -18,9 +14,115 @@ div {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -250px;
+    margin-top: -130px;
     margin-left: -400px;
     width: 800px;
-    height: 500px;
+    height: 260px;
 }
 
+table {
+    position: relative;
+    border-collapse: collapse;
+    top: 0px;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+.table-image{
+    width: 70px;
+}
+
+.table-label{
+    font-size: 32px;
+    width: 140px;
+}
+
+.table-total{
+    font-size: 32px;
+    width: 210px;
+    text-align: center;
+}
+
+.table-new{
+    font-size: 32px;
+    width: 130px;
+    text-align: center;
+    
+}
+
+.table-rate{
+    text-align: center;
+    font-size: 18px;
+    width: 50px;
+}
+
+.table-arrow{
+    text-align: center;
+    font-size: 32px;
+}
+
+#p-disclaimer{
+    position: absolute;
+    font-size: 10px;
+    top: 540px;
+    left: 320px;
+    width: 810px;
+}
+
+#p-date{
+    position: absolute;
+    top: -55px;
+}
+
+#div-light-gray-back-confirmed{
+    position: absolute;
+    top: 282px;
+    left: 320px;
+    width: 800px;
+    height: 86px;
+    background-color: #f1f1f1;
+}
+
+#div-light-gray-back-recovered{
+    position: absolute;
+    top: 368px;
+    left: 320px;
+    width: 800px;
+    height: 87px;
+    background-color: #f1f1f1;
+}
+
+#div-light-gray-back-deaths{
+    position: absolute;
+    top: 456px;
+    left: 320px;
+    width: 800px;
+    height: 86px;
+    background-color: #f1f1f1;
+}
+
+#div-confirmed-progress{
+    position: absolute;
+    height: 86px;
+    background-color: rgb(250, 109, 98);
+    opacity: 0.3;
+}
+
+#div-recovered-progress{
+    position: absolute;
+    height: 86px;
+    background-color: rgb(127, 189, 146);
+    opacity: 0.3;
+}
+
+#div-deaths-progress{
+    position: absolute;
+    height: 86px;
+    background-color: rgb(75, 86, 97);
+    opacity: 0.2;
+}
