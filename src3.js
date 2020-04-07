@@ -5,8 +5,8 @@ function numberWithCommas(x) {
 }
 
 function setDate(param) {
-    var dateParts = param.substring(0,10).split('-');
-    myDate= dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];
+    var dateParts = param.substring(0, 10).split('-');
+    myDate = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];
     document.getElementById("p-date").innerHTML = "Last updated " + myDate;
 }
 
@@ -64,8 +64,8 @@ function setTodaysConfirmedRate(param1) {
     if (param1 > 0) {
         document.getElementById("table-confirmed-arrow").style.color = "red"
         document.getElementById("table-confirmed-arrow").innerHTML = "&#8679;";
-    } 
-    else if(param1 < 0) {
+    }
+    else if (param1 < 0) {
         document.getElementById("table-confirmed-arrow").style.color = "green"
         document.getElementById("table-confirmed-arrow").innerHTML = "&#8681;";
     }
@@ -79,8 +79,8 @@ function setTodaysRecoveredRate(param1) {
     if (param1 > 0) {
         document.getElementById("table-recovered-arrow").style.color = "green"
         document.getElementById("table-recovered-arrow").innerHTML = "&#8679;";
-    } 
-    else if(param1 < 0) {
+    }
+    else if (param1 < 0) {
         document.getElementById("table-recovered-arrow").style.color = "red"
         document.getElementById("table-recovered-arrow").innerHTML = "&#8681;";
     }
@@ -94,8 +94,8 @@ function setTodaysDeathsRate(param1) {
     if (param1 > 0) {
         document.getElementById("table-deaths-arrow").style.color = "red"
         document.getElementById("table-deaths-arrow").innerHTML = "&#8679;";
-    } 
-    else if(param1 < 0) {
+    }
+    else if (param1 < 0) {
         document.getElementById("table-deaths-arrow").style.color = "green"
         document.getElementById("table-deaths-arrow").innerHTML = "&#8681;";
     }
@@ -104,23 +104,67 @@ function setTodaysDeathsRate(param1) {
     }
 }
 
-function setNewForTodayAndYesturdayData(data) {
-    data[COUNTRY][data[COUNTRY].length - 1].newConfirmed = data[COUNTRY][data[COUNTRY].length - 1].confirmed - data[COUNTRY][data[COUNTRY].length - 2].confirmed
-    data[COUNTRY][data[COUNTRY].length - 1].newRecovered = data[COUNTRY][data[COUNTRY].length - 1].recovered - data[COUNTRY][data[COUNTRY].length - 2].recovered
-    data[COUNTRY][data[COUNTRY].length - 1].newDeaths = data[COUNTRY][data[COUNTRY].length - 1].deaths - data[COUNTRY][data[COUNTRY].length - 2].deaths
-
-    data[COUNTRY][data[COUNTRY].length - 2].newConfirmed = data[COUNTRY][data[COUNTRY].length - 2].confirmed - data[COUNTRY][data[COUNTRY].length - 3].confirmed
-    data[COUNTRY][data[COUNTRY].length - 2].newRecovered = data[COUNTRY][data[COUNTRY].length - 2].recovered - data[COUNTRY][data[COUNTRY].length - 3].recovered
-    data[COUNTRY][data[COUNTRY].length - 2].newDeaths = data[COUNTRY][data[COUNTRY].length - 2].deaths - data[COUNTRY][data[COUNTRY].length - 3].deaths
+function setNewForAll(data) {
+    data[COUNTRY][0].newConfirmed = 0;
+    for (let i = 1; i < data[COUNTRY].length; i++) {
+        data[COUNTRY][i].newConfirmed = data[COUNTRY][i].confirmed - data[COUNTRY][i-1].confirmed
+        data[COUNTRY][i].newRecovered = data[COUNTRY][i].recovered - data[COUNTRY][i-1].recovered
+        data[COUNTRY][i].newDeaths = data[COUNTRY][i].deaths - data[COUNTRY][i-1].deaths
+    }
 }
 
-function setGraphBar(confirmed, recovered, deaths){
+function setGraphBar(confirmed, recovered, deaths) {
     let MAX_WIDTH = 800;
-    if (confirmed > recovered && confirmed > deaths){
+    if (confirmed > recovered && confirmed > deaths) {
         document.getElementById("div-confirmed-progress").style.width = MAX_WIDTH + "px";
-        document.getElementById("div-recovered-progress").style.width = parseInt((recovered/confirmed*MAX_WIDTH), 10) + "px";
-        document.getElementById("div-deaths-progress").style.width = parseInt((deaths/confirmed*MAX_WIDTH), 10) + "px";
+        document.getElementById("div-recovered-progress").style.width = parseInt((recovered / confirmed * MAX_WIDTH), 10) + "px";
+        document.getElementById("div-deaths-progress").style.width = parseInt((deaths / confirmed * MAX_WIDTH), 10) + "px";
     }
+}
+
+function barGraph(data) {
+    let leftShift = 0;
+    let MAXCONFIRMED = Math.max(...(data[COUNTRY].map(a => parseInt(a.newConfirmed, 10))));
+    for (let i = data[COUNTRY].length - 20; i < data[COUNTRY].length; i++) {
+        let height = ((data[COUNTRY][i].newConfirmed/MAXCONFIRMED)*200 < 20)? 20: (data[COUNTRY][i].newConfirmed/MAXCONFIRMED)*200;
+        
+        let newLabel = document.createElement("P");
+        newLabel.innerHTML = "+" + data[COUNTRY][i].newConfirmed;
+        newLabel.className = "div-bar-label";
+        newLabel.style.top = "0px";
+        newLabel.style.margin = "0px";
+        newLabel.style.textAlign = "center";
+        newLabel.style.fontSize = "8px";
+
+        var dateParts = data[COUNTRY][i].date.substring(0, 10).split('-');
+        myDate = dateParts[1] + '/' + dateParts[2];
+
+        let dateLabel = document.createElement("P");
+        dateLabel.innerHTML = myDate;
+        dateLabel.className = "div-bar-label";
+        dateLabel.style.bottom = "0px";
+        dateLabel.style.margin = "0px";
+        dateLabel.style.textAlign = "center";
+        dateLabel.style.fontSize = "8px";
+
+        let newDiv = document.createElement("DIV");
+        newDiv.className = "div-bar";
+        newDiv.style.height = height + "px";
+        newDiv.style.top = (200 - height) + "px";
+        newDiv.style.left = leftShift + "px";
+        leftShift = leftShift + 40;
+
+        document.getElementById("div-bar-graph").appendChild(newDiv);
+        newDiv.appendChild(newLabel);
+        newDiv.appendChild(dateLabel);
+    }
+
+    let barTitle = document.createElement("P");
+    barTitle.innerHTML = "New Confirmed Cases";
+    barTitle.id = "p-bar-graph-title";
+    document.getElementById("div-bar-graph").appendChild(barTitle);
+
+
 }
 
 fetch("https://pomber.github.io/covid19/timeseries.json")
@@ -132,7 +176,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         setConfirmed(getTodaysData(data).confirmed, getTodaysNewConfirmed(data));
         setRecovered(getTodaysData(data).recovered, getTodaysNewRecovered(data));
         setDeaths(getTodaysData(data).deaths, getTodaysNewDeaths(data));
-        setNewForTodayAndYesturdayData(data);
+        setNewForAll(data);
 
         setTodaysConfirmedRate(parseInt(getTodaysRateConfirmed(data), 10));
         setTodaysRecoveredRate(parseInt(getTodaysRateRecovered(data), 10));
@@ -140,6 +184,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 
         setGraphBar(getTodaysData(data).confirmed, getTodaysData(data).recovered, getTodaysData(data).deaths);
 
+        barGraph(data);
     });
 
 

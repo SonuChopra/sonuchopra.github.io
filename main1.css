@@ -4,11 +4,6 @@ body {
     overflow: hidden;
 }
 
-/* div {
-    border: solid black 1px;
-    position: relative;
-} */
-
 #div-center {
   position: absolute;
   top: 80px;

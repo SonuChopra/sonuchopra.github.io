@@ -4,9 +4,42 @@ body {
     overflow: hidden;
 }
 
+/* div{
+    border: solid black 1px;
+} */
+
+#div-bar-graph{
+    position: absolute;
+    width: 800px;
+    height: 200px;
+    top: -110px;
+    left: 50%;
+    margin-top: -130px;
+    margin-left: -400px;
+}
+
+.div-bar{
+    position: absolute;
+    width: 39px;
+    background-color: rgba(250, 109, 98, 0.4);
+}
+
+#p-bar-graph-title{
+    position: absolute;
+    left: 610px;
+    top: 160px;
+    width: 300px;
+    font-size: 18px;
+    color: white;
+}
+
+.div-bar-label{
+    position: relative;
+}
+
 #div-quick-glimpse{
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     margin-top: -130px;
     margin-left: -400px;
