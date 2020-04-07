@@ -159,8 +159,11 @@ function barGraph(data) {
         newDiv.appendChild(dateLabel);
     }
 
+    let lastUpdated = data[COUNTRY][data[COUNTRY].length-1].date.substring(0, 10).split('-');
+    lastUpdatedDate = lastUpdated[1] + '/' + lastUpdated[2] + '/' + lastUpdated[0];
+
     let barTitle = document.createElement("P");
-    barTitle.innerHTML = "New Confirmed Cases";
+    barTitle.innerHTML = "New confirmed cases by date for past 20 days from " + lastUpdatedDate;
     barTitle.id = "p-bar-graph-title";
     document.getElementById("div-bar-graph").appendChild(barTitle);
 
